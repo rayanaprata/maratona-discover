@@ -1,6 +1,8 @@
-module.exports = {
+const Profile = require('../model/Profile');
+
+module.exports = { // o module.exports faz tudo que está aqui dentro ser exportavel
     index(req, res) {
-        return res.render("profile", { profile: Profile.data })
+        return res.render("profile", { profile: Profile.get() })
     },
 
     update(req, res) {
@@ -22,11 +24,11 @@ module.exports = {
         //definindo o valor da horas
         const valueHour = data["value-hour"] = data["monthly-budget"] / monthlyTotalHours
 
-        Profile.data = {
-            ...Profile.data,
+        Profile.update({
+            ...Profile.get(),
             ...req.body,
             "value-hour": valueHour
-        }
+        })
 
         return res.redirect('/profile')
     }
