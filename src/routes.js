@@ -35,7 +35,7 @@ const Job = {
                     ...job,
                     remaining,
                     status,
-                    budget: Job.services.calculateBudget(job, Profile.data["value-hour"])
+                    budget: Job.services.calculateBudget(job, ProfileController.valueHour)
                 }
             })
 
@@ -66,7 +66,7 @@ const Job = {
                 return res.send("Job not found!")
             }
 
-            job.budget = Job.services.calculateBudget(job, Profile.data["value-hour"])
+            job.budget = Job.services.calculateBudget(job, ProfileController.valueHour)
 
             return res.render("job-edit", { job })
         },
